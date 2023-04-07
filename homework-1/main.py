@@ -20,7 +20,6 @@ with open('C://Users//KO77-31//Desktop//skypro//SQL//postgres-homeworks//homewor
         employees.append(red_res)
     employees = employees[1:len(employees)]
 
-print(employees)
 
 with open('C://Users//KO77-31//Desktop//skypro//SQL//postgres-homeworks//homework-1//north_data//customers_data.csv',
           'r') as file:
@@ -50,7 +49,7 @@ with open('C://Users//KO77-31//Desktop//skypro//SQL//postgres-homeworks//homewor
 
 with psycopg2.connect(
     host="localhost",
-    database="north",
+    database="north1",
     user="postgres",
     password=password
 ) as conn:

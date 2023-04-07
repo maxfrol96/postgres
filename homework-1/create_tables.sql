@@ -1,36 +1,25 @@
-CREATE TABLE IF NOT EXISTS public.customers
+create table customers
 (
-    customer_id character varying(5) COLLATE pg_catalog."default" NOT NULL,
-    company_name character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    contact_name character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT customers_pkey PRIMARY KEY (customer_id)
-)
+	customer_id varchar(5) primary key,
+	company_name varchar(40) not null,
+	contact_name varchar(40) not null
+);
 
-CREATE TABLE IF NOT EXISTS public.employees
+create table employees
 (
-    employee_id integer NOT NULL DEFAULT nextval('employees_employee_id_seq'::regclass),
-    first_name character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    last_name character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    title character varying(40) COLLATE pg_catalog."default" NOT NULL,
-    birth_date date NOT NULL,
-    notes text COLLATE pg_catalog."default",
-    CONSTRAINT employees_pkey PRIMARY KEY (employee_id)
-)
+	employee_id int primary key,
+	first_name varchar(20) not null,
+	last_name varchar(20) not null,
+	title varchar(40) not null,
+	birth_date date not null,
+	notes text not null
+);
 
-CREATE TABLE IF NOT EXISTS public.orders
+create table orders
 (
-    order_id integer NOT NULL,
-    customer_id character varying(5) COLLATE pg_catalog."default" NOT NULL,
-    employee_id integer NOT NULL,
-    order_date date NOT NULL,
-    ship_city character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT orders_pkey PRIMARY KEY (order_id),
-    CONSTRAINT orders_customer_id_fkey FOREIGN KEY (customer_id)
-        REFERENCES public.customers (customer_id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT orders_employee_id_fkey FOREIGN KEY (employee_id)
-        REFERENCES public.employees (employee_id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
+	order_id int primary key,
+	customer_id varchar(5) references customers(customer_id) not null,
+	employee_id int references employees(employee_id) not null,
+	order_date date not null,
+	ship_city varchar(20) not null
+);
