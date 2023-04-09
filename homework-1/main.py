@@ -6,9 +6,9 @@ customers = []
 employees = []
 orders = []
 password = os.getenv('PSQL_pass')
+absbath = os.path.abspath('north_data')
 
-with open('C://Users//KO77-31//Desktop//skypro//SQL//postgres-homeworks//homework-1//north_data//employees_data.csv',
-          'r') as file:
+with open(absbath+'\employees_data.csv', 'r') as file:
     for row in file:
         res = row.split('",')
         red_res =[]
@@ -21,8 +21,7 @@ with open('C://Users//KO77-31//Desktop//skypro//SQL//postgres-homeworks//homewor
     employees = employees[1:len(employees)]
 
 
-with open('C://Users//KO77-31//Desktop//skypro//SQL//postgres-homeworks//homework-1//north_data//customers_data.csv',
-          'r') as file:
+with open(absbath+'\customers_data.csv', 'r') as file:
     for row in file:
         res = row.split(',')
         red_res =[]
@@ -34,7 +33,7 @@ with open('C://Users//KO77-31//Desktop//skypro//SQL//postgres-homeworks//homewor
         customers.append(red_res)
     customers = customers[1:len(customers)]
 
-with open('C://Users//KO77-31//Desktop//skypro//SQL//postgres-homeworks//homework-1//north_data//orders_data.csv',
+with open(absbath+'\orders_data.csv',
           'r') as file:
     for row in file:
         res = row.split(',')
@@ -62,4 +61,3 @@ with psycopg2.connect(
             id += 1
         for item in orders:
             cur.execute(f"INSERT INTO orders values ('{item[0]}', '{item[1]}', '{item[2]}', '{item[3]}', '{item[4]}')")
-
