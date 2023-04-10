@@ -6,9 +6,9 @@ customers = []
 employees = []
 orders = []
 password = os.getenv('PSQL_pass')
-absbath = os.path.abspath('north_data')
+dirname = os.path.dirname(__file__)
 
-with open(absbath+'\employees_data.csv', 'r') as file:
+with open(os.path.join(dirname, 'north_data', 'employees_data.csv'), 'r') as file:
     for row in file:
         res = row.split('",')
         red_res =[]
@@ -21,7 +21,7 @@ with open(absbath+'\employees_data.csv', 'r') as file:
     employees = employees[1:len(employees)]
 
 
-with open(absbath+'\customers_data.csv', 'r') as file:
+with open(os.path.join(dirname, 'north_data', 'customers_data.csv'), 'r') as file:
     for row in file:
         res = row.split(',')
         red_res =[]
@@ -33,7 +33,7 @@ with open(absbath+'\customers_data.csv', 'r') as file:
         customers.append(red_res)
     customers = customers[1:len(customers)]
 
-with open(absbath+'\orders_data.csv',
+with open(os.path.join(dirname, 'north_data', 'orders_data.csv'),
           'r') as file:
     for row in file:
         res = row.split(',')
