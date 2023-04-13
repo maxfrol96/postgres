@@ -19,11 +19,11 @@ where discontinued = 0 and units_in_stock < 25 and category_name in('Dairy Produ
 order by units_in_stock
 
 -- 3. Список компаний заказчиков (company_name из табл customers), не сделавших ни одного заказа
-select company_name from customers
+select distinct company_name from customers
+inner join orders using (customer_id)
 where company_name not in (select ship_name from orders)
 
 -- 4. уникальные названия продуктов, которых заказано ровно 10 единиц (количество заказанных единиц см в колонке quantity табл order_details)
 -- Этот запрос написать именно с использованием подзапроса.
-select distinct product_name from products
-left join order_details using(product_id)
+select product_name from products
 where product_id in (select product_id from order_details where quantity = 10)
